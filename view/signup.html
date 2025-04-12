@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+</head>
+<body>
+    <div class="bg-gray-200 min-h-screen flex justify-center items-center animate__animated animate__fadeIn">
+        <div class="p-8 w-5/12 bg-white rounded-xl flex flex-col items-center gap-8 animate__animated animate__pulse">
+            <div class="flex items-center gap-2">
+                <i class="ri-contrast-2-fill text-5xl text-violet-700"></i>
+                <h1 class="text-3xl font-semibold">Filemoon</h1>
+            </div>
+
+            <form class="w-full space-y-6" onsubmit="signup(event)">
+                <div class="space-y-1">
+                    <label class="text-gray-500 text-[17px] block">Fullname</label>
+                    <input 
+                        name="fullname"
+                        class="p-3 rounded border border-gray-300 w-full" 
+                        placeholder="Er Saurav" 
+                        required 
+                        type="text" 
+                    />
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-gray-500 text-[17px] block">Mobile</label>
+                    <input 
+                        name="mobile"
+                        class="p-3 rounded border border-gray-300 w-full" 
+                        placeholder="013258484" 
+                        required 
+                        type="number" 
+                    />
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-gray-500 text-[17px] block">Email</label>
+                    <input 
+                        name="email"
+                        class="p-3 rounded border border-gray-300 w-full" 
+                        placeholder="email@mail.com" 
+                        required 
+                        type="email"
+                    />
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-gray-500 text-[17px] block">Password</label>
+                    <input 
+                        name="password"
+                        class="p-3 rounded border border-gray-300 w-full" 
+                        placeholder="*********" 
+                        required 
+                        type="password" 
+                    />
+                </div>
+
+                <button class="p-3 rounded bg-violet-500 w-full text-white font-medium hover:bg-violet-600">Sign up</button>
+            </form>
+
+            <div class="flex items-center gap-2">
+                <p class="text-gray-500">Already have an account ?</p>
+                <a href="./index.html" class="text-green-500 font-medium">Login</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/env.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/signup.js"></script>
+</body>
+</html>

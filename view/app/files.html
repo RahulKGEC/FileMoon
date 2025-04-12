@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="bg-gray-100 h-screen">
+        <aside class="space-y-6 py-6 bg-linear-to-r from-cyan-500 to-blue-500 fixed top-0 left-0 h-full" id="sidebar" style="width: 250px; transition: 0.3s">
+            <div class="flex flex-col items-center">
+                <img src="../images/avt.png" id="pic" onclick="uploadImage()" class="w-[80px] h-[80px] rounded-full object-cover" />
+                <h1 class="text-lg font-medium text-white">Er Saurav</h1>
+                <p class="text-sm text-gray-100">saurav@gmail.com</p>
+            </div>
+
+            <div class="px-6 flex flex-col gap-4">
+                <a href="/dashboard">
+                    <button class="w-full bg-rose-400 text-white py-2.5 rounded hover:bg-rose-600">
+                        <i class="ri-apps-line"></i>
+                        <label>Dashboard</label>
+                    </button>
+                </a>
+
+                <a href="/files">
+                    <button class="w-full bg-rose-400 text-white py-2.5 rounded hover:bg-rose-600">
+                        <i class="ri-file-line"></i>
+                        <label>My Files</label>
+                    </button>
+                </a>
+
+                <a href="/history">
+                    <button class="w-full bg-rose-400 text-white py-2.5 rounded hover:bg-rose-600">
+                        <i class="ri-history-line"></i>
+                        <label>History</label>
+                    </button>
+                </a>
+
+                <button onclick="logout()" class="w-full bg-rose-400 text-white py-2.5 rounded hover:bg-rose-600">
+                    <i class="ri-logout-circle-r-line"></i>
+                    <label>Logout</label>
+                </button>
+            </div>
+        </aside>
+        <section id="section" style="margin-left: 250px; transition: 0.3s">
+            <nav class="bg-white px-6 py-4 w-full shadow-lg flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="ri-contrast-2-fill text-4xl text-violet-700"></i>
+                    <h1 class="text-2xl font-semibold">Filemoon</h1>
+                </div>
+                <div class="space-x-2">
+                    <button onclick="logout()" class="bg-gray-100 px-3 py-2 rounded hover:bg-gray-200">
+                        <i class="ri-logout-circle-r-line"></i>
+                    </button>
+                    <button onclick="toggleSidebar()" class="bg-gray-100 px-3 py-2 rounded hover:bg-gray-200">
+                        <i class="ri-menu-2-line"></i>
+                    </button>
+                </div>
+            </nav>
+            <div class="p-6 space-y-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-lg font-medium">My Files</h1>
+                    <button onclick="toggleDrawer()" class="bg-violet-500 hover:bg-violet-600 text-white px-6 py-2 rounded">
+                        <i class="ri-add-line"></i>
+                        <label>Add File</label>
+                    </button>
+                </div>
+                <table class="w-full bg-white">
+                    <thead>
+                        <tr class="bg-slate-900 text-white text-left">
+                            <th class="font-medium py-4 pl-6">Filename</th>
+                            <th class="font-medium">Type</th>
+                            <th class="font-medium">Size</th>
+                            <th class="font-medium">Created</th>
+                            <th class="font-medium">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="files-table">
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <div class="fixed w-4/12 bg-white shadow-lg top-0 h-full p-6 space-y-6" style="right: -33.33%; transition: 0.2s;" id="drawer">
+            <div class="flex justify-between items-center">
+                <h1 class="text-lg font-medium text-gray-600">Adding a new file</h1>
+                <button onclick="toggleDrawer()">
+                    <i class="ri-close-circle-fill hover:text-rose-600 text-lg"></i>
+                </button>
+            </div>
+            <div class="h-px bg-gray-100 -mx-6"></div>
+            <form class="space-y-6" onsubmit="uploadFile(event)">
+                <div class="flex flex-col gap-2">
+                    <label class="text-gray-600 font-medium">Filename</label>
+                    <input name="filename" required class="py-2 px-3 rounded border border-gray-300" placeholder="Enter file name">
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-gray-600 font-medium">Choose a file</label>
+                    <input name="file" type="file" required class="py-2 px-3 rounded border border-gray-300" placeholder="Enter file name">
+                </div>
+
+                <button id="upload-btn" class="py-2 px-6 bg-rose-400 hover:bg-rose-500 text-white rounded font-medium">Upload Now</button>
+            </form>
+
+            <div class="bg-gray-200 h-4">
+                <div class="h-full bg-green-500 text-xs text-gray-500 text-center" style="width: 0" id="progress">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/env.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/files.js"></script>
+</body>
+</html>
